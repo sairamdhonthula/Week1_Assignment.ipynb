@@ -1,0 +1,25 @@
+# Forecast for Future Years
+future_years = pd.DataFrame({
+    'Year': np.arange(2025, 2031),  # Next 6 years
+    'Month': [1]*6,
+    'State_enc': [0]*6,  # Assuming 'Unknown' or most common
+    'County_enc': [0]*6,
+    'VehicleUse_enc': [0]*6,
+    'Non-Electric Vehicle Total': [1000]*6,
+    'Total Vehicles': [1500]*6
+})
+
+future_pred = rfr.predict(future_years)
+
+plt.figure(figsize=(8,5))
+plt.plot(future_years['Year'], future_pred, marker='o')
+plt.title("Forecasted EV Adoption (2025–2030)")
+plt.xlabel("Year")
+plt.ylabel("Predicted EV Total")
+plt.grid(True)
+plt.show()
+
+print("Future Predictions:\n", pd.DataFrame({
+    "Year": future_years['Year'],
+    "Predicted EVs": future_pred.astype(int)
+}))
